@@ -1,0 +1,29 @@
+@model IEnumerable<FoodInventory.Models.User>
+@{
+    ViewData["Title"] = "Zarządzanie Użytkownikami";
+}
+
+<h2>Lista zarejestrowanych użytkowników 👥</h2>
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nazwa użytkownika</th>
+            <th>Rola w systemie</th>
+            <th>Klucz API (Token)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var u in Model)
+        {
+            <tr>
+                <td>@u.Id</td>
+                <td><strong>@u.Username</strong></td>
+                <td>
+                    <span class="badge @(u.Role == "Admin" ? "bg-danger" : "bg-primary")">@u.Role</span>
+                </td>
+                <td><code class="text-secondary">@u.ApiToken</code></td>
+            </tr>
+        }
+    </tbody>
+</table>

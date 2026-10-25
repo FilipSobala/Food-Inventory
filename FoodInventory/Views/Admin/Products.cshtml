@@ -1,0 +1,48 @@
+@model IEnumerable<FoodInventory.Models.Product>
+@{
+    ViewData["Title"] = "Zarządzanie Produktami";
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <h2>Słownik Produktów Bazowych 🍎</h2>
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nazwa Produktu</th>
+                    <th>Kategoria</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var p in Model)
+                {
+                    <tr>
+                        <td>@p.Id</td>
+                        <td><strong>@p.Name</strong></td>
+                        <td>@p.Category.Icon @p.Category.Name</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-4 bg-light p-4 rounded">
+        <h4>Dodaj nowy produkt bazowy</h4>
+        <form method="post" action="/Admin/AddProduct">
+            <div class="mb-3">
+                <label class="form-label">Nazwa</label>
+                <input type="text" name="name" class="form-control" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Kategoria</label>
+                <select name="categoryId" class="form-select" required>
+                    @foreach (var c in ViewBag.Categories)
+                    {
+                        <option value="@c.Id">@c.Icon @c.Name</option>
+                    }
+                </select>
+            </div>
+            <button type="submit" class="btn btn-danger w-100">Dodaj do słownika</button>
+        </form>
+    </div>
+</div>

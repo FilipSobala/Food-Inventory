@@ -1,0 +1,43 @@
+@model IEnumerable<FoodInventory.Models.Category>
+@{
+    ViewData["Title"] = "Zarządzanie Kategoriami";
+}
+
+<div class="row">
+    <div class="col-md-8">
+        <h2>Kategorie Produktów 📦</h2>
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Ikona</th>
+                    <th>Nazwa Kategorii</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var c in Model)
+                {
+                    <tr>
+                        <td>@c.Id</td>
+                        <td style="font-size: 24px;">@c.Icon</td>
+                        <td><strong>@c.Name</strong></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-4 bg-light p-4 rounded">
+        <h4>Dodaj nową kategorię</h4>
+        <form method="post" action="/Admin/AddCategory">
+            <div class="mb-3">
+                <label class="form-label">Nazwa Kategorii</label>
+                <input type="text" name="name" class="form-control" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Ikona (Emoji)</label>
+                <input type="text" name="icon" class="form-control" placeholder="np. 🥑" required />
+            </div>
+            <button type="submit" class="btn btn-danger w-100">Dodaj kategorię</button>
+        </form>
+    </div>
+</div>

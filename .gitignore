@@ -1,0 +1,10 @@
+bin/
+obj/
+*.db
+*.db-shm
+*.db-wal
+*.lscache
+.vs/
+.idea/
+*.user
+.DS_Store

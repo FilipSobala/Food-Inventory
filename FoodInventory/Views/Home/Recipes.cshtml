@@ -1,0 +1,36 @@
+@model IEnumerable<FoodInventory.Models.Recipe>
+@{
+    ViewData["Title"] = "Dopasowane Przepisy";
+}
+
+<h2>Sugerowane Przepisy 🍳</h2>
+<p class="text-muted">Pokazujemy przepisy, do których posiadasz przynajmniej jeden składnik w lodówce.</p>
+
+<div class="row mt-4">
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">Brak przepisów w bazie. Zaloguj się jako admin, aby dodać przepisy bazowe!</div>
+    }
+    
+    @foreach (var recipe in Model)
+    {
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h4 class="card-title text-primary">@recipe.Name</h4>
+                    <h6 class="card-subtitle mb-2 text-muted">⏱ Czas przygotowania: @recipe.PrepTimeMinutes min</h6>
+                    <hr />
+                    <h6>Składniki:</h6>
+                    <ul>
+                        @foreach (var rp in recipe.RecipeProducts)
+                        {
+                            <li>@rp.Product.Name - @rp.Quantity @rp.Unit</li>
+                        }
+                    </ul>
+                    <h6>Instrukcja:</h6>
+                    <p class="card-text">@recipe.Instructions</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
